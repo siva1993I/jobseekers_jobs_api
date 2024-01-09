@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  jobseeker_jobs_api:
+    image: ${DOCKER_REGISTRY-}jobseekerjobsapi
+    build:
+      context: .
+      dockerfile: jobseeker_jobs_api/Dockerfile
