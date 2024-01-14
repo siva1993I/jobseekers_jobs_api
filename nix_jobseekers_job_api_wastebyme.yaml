@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jobseekers-job-api
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jobseekers-job-api
+  template:
+    metadata:
+      labels:
+        app: jobseekers-job-api
+    spec:
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+        - name: jobseekers-job-api
+          image: containerregistry1z.azurecr.io/jobseeker-jobs-api:20240114.1
+          resources:
+            limits:
+              cpu: "0.2"
+              memory: 600M
+            requests:
+              cpu: "0.2"
+              memory: 500M
+          env:
+            - name: CUSTOMCONNSTR_DefaultConnection
+              value: "#{db_conn_str}#"
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: acr-registy-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jobseekers-job-api-svc
+  namespace: default
+spec:
+  selector:
+    app: jobseekers-job-api
+  ports:
+    - port: 80
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 52.140.49.139
