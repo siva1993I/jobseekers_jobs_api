@@ -5,7 +5,6 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-- group: New variable group 14-Jan
 - group: ACR_CRED
 
 steps:
