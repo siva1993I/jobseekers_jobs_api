@@ -19,7 +19,7 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '6.0.x'
+          dotnet-version: '8.x'
           include-prerelease: true
 
       - name: Build with dotnet
@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'azureclipcreation1'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_820ED5F844E048C7A73D4EEFB4FF62FE }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5E786B6E184D4BDDBFCCED00820869DC }}
           package: .
